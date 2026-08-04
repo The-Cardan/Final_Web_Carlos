@@ -23,6 +23,9 @@ namespace Final_Web_Carlos.Data
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
+            modelBuilder.Entity<Servicio>()
+    .Property(s => s.Precio)
+    .HasPrecision(10, 2);
 
             // Evita que se eliminen registros relacionados automáticamente
             modelBuilder.Entity<Cita>()
@@ -41,6 +44,24 @@ namespace Final_Web_Carlos.Data
                 .HasOne(d => d.Especialidad)
                 .WithMany(e => e.Dentistas)
                 .HasForeignKey(d => d.EspecialidadId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            modelBuilder.Entity<Cita>()
+    .HasOne(c => c.Servicio)
+    .WithMany(s => s.Citas)
+    .HasForeignKey(c => c.ServicioId)
+    .OnDelete(DeleteBehavior.Restrict);
+
+            modelBuilder.Entity<Cita>()
+                .HasOne(c => c.Motivo)
+                .WithMany(m => m.Citas)
+                .HasForeignKey(c => c.MotivoId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            modelBuilder.Entity<Cita>()
+                .HasOne(c => c.Consultorio)
+                .WithMany(cn => cn.Citas)
+                .HasForeignKey(c => c.ConsultorioId)
                 .OnDelete(DeleteBehavior.Restrict);
         }
     }
