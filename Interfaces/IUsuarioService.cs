@@ -1,4 +1,5 @@
 ﻿using Final_Web_Carlos.DTOs;
+using Final_Web_Carlos.Models;
 
 namespace Final_Web_Carlos.Interfaces
 {
@@ -13,5 +14,6 @@ namespace Final_Web_Carlos.Interfaces
         Task<UsuarioResponseDto?> ObtenerPorIdAsync(int id);
 
         Task<bool> EliminarAsync(int id);
+        Task<Usuario?> ValidarCredencialesAsync(UsuarioLoginDto dto);
     }
 }
