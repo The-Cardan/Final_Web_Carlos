@@ -1,6 +1,9 @@
-﻿namespace Final_Web_Carlos.Interfaces
+﻿using Final_Web_Carlos.Models;
+
+namespace Final_Web_Carlos.Interfaces
 {
-    public class IJwtService
+    public interface IJwtService
     {
+        string GenerarToken(Usuario usuario);
     }
 }
