@@ -121,5 +121,19 @@ namespace Final_Web_Carlos.Services
             return await _usuarioRepository
                 .EliminarAsync(id);
         }
+        public async Task<Usuario?> ValidarCredencialesAsync(UsuarioLoginDto dto)
+        {
+            var usuario = await _usuarioRepository.ObtenerPorCorreoAsync(dto.Correo);
+
+            if (usuario == null)
+                return null;
+
+            bool passwordCorrecta = BCrypt.Net.BCrypt.Verify(dto.Password, usuario.Password);
+
+            if (!passwordCorrecta)
+                return null;
+
+            return usuario;
+        }
     }
 }
