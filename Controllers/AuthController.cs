@@ -21,14 +21,30 @@ namespace Final_Web_Carlos.Controllers
             _jwtService = jwtService;
         }
 
+        /// <summary>
+        /// Registrar un nuevo usuario.
+        /// </summary>
         [HttpPost("register")]
-        public async Task<IActionResult> Register(UsuarioRegisterDto dto)
+        public async Task<IActionResult> Register([FromBody] UsuarioRegisterDto dto)
         {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(new ApiResponse<object>
+                {
+                    Success = false,
+                    Message = "Datos inválidos.",
+                    Errors = ModelState.Values
+                        .SelectMany(v => v.Errors)
+                        .Select(e => e.ErrorMessage)
+                        .ToList()
+                });
+            }
+
             try
             {
                 var usuario = await _usuarioService.RegistrarAsync(dto);
 
-                return Ok(new ApiResponse<UsuarioResponseDto>
+                return Created("", new ApiResponse<UsuarioResponseDto>
                 {
                     Success = true,
                     Message = Messages.RegistroExitoso,
@@ -45,9 +61,21 @@ namespace Final_Web_Carlos.Controllers
             }
         }
 
+        /// <summary>
+        /// Iniciar sesión.
+        /// </summary>
         [HttpPost("login")]
-        public async Task<IActionResult> Login(UsuarioLoginDto dto)
+        public async Task<IActionResult> Login([FromBody] UsuarioLoginDto dto)
         {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(new ApiResponse<object>
+                {
+                    Success = false,
+                    Message = "Datos inválidos."
+                });
+            }
+
             var usuario = await _usuarioService.ValidarCredencialesAsync(dto);
 
             if (usuario == null)
@@ -67,7 +95,9 @@ namespace Final_Web_Carlos.Controllers
                 Message = Messages.LoginExitoso,
                 Data = new
                 {
-                    token
+                    Token = token,
+                    Usuario = usuario.Nombre,
+                    Correo = usuario.Correo
                 }
             });
         }
