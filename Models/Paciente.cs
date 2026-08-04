@@ -23,5 +23,8 @@ namespace Final_Web_Carlos.Models
         public string? Correo { get; set; }
 
         public DateTime FechaNacimiento { get; set; }
+
+        // Relación: Un paciente puede tener muchas citas
+        public ICollection<Cita>? Citas { get; set; }
     }
 }
