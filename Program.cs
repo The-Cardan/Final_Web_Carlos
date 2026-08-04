@@ -4,6 +4,8 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
+using Final_Web_Carlos.Interfaces;
+using Final_Web_Carlos.Repositories;
 
 var builder = WebApplication.CreateBuilder(args);
 
