@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace Final_Web_Carlos.Controllers
 {
     [ApiController]
-    [Route("api/[controller]")]
+    [Route("api/auth")]
     public class AuthController : ControllerBase
     {
         private readonly IUsuarioService _usuarioService;
