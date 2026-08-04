@@ -7,6 +7,9 @@ using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using Final_Web_Carlos.Interfaces;
 using Final_Web_Carlos.Repositories;
+using Final_Web_Carlos.Interfaces;
+using Final_Web_Carlos.Repositories;
+using Final_Web_Carlos.Services;
 
 
 var builder = WebApplication.CreateBuilder(args);
