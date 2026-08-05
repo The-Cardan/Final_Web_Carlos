@@ -68,6 +68,9 @@ builder.Services.AddScoped<IEspecialidadService, EspecialidadService>();
 builder.Services.AddScoped<IDentistaRepository, DentistaRepository>();
 builder.Services.AddScoped<IDentistaService, DentistaService>();
 
+builder.Services.AddScoped<IHorarioDentistaRepository, HorarioDentistaRepository>();
+builder.Services.AddScoped<IHorarioDentistaService, HorarioDentistaService>();
+
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     .AddJwtBearer(options =>
     {
