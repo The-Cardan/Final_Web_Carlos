@@ -1,6 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
+
 namespace Final_Web_Carlos.Models
 {
     public class Cita
@@ -51,5 +52,24 @@ namespace Final_Web_Carlos.Models
         public string Estado { get; set; } = string.Empty;
 
         public string DiasHorasRestantes { get; set; } = string.Empty;
+
+
+        [NotMapped]
+        public DateTime FechaHoraInicio
+        {
+            get
+            {
+                return Fecha.Date + Hora;
+            }
+        }
+
+        [NotMapped]
+        public DateTime FechaHoraFin
+        {
+            get
+            {
+                return Fecha.Date + Hora.Add(TimeSpan.FromMinutes(Duracion));
+            }
+        }
     }
 }
