@@ -1,4 +1,6 @@
-﻿namespace Final_Web_Carlos.DTOs
+﻿
+
+namespace Final_Web_Carlos.DTOs
 {
     public class HorarioDentistaResponseDto
     {
