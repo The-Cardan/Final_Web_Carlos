@@ -17,54 +17,38 @@ namespace Final_Web_Carlos.Repositories
         public async Task<List<Cita>> ObtenerTodasAsync()
         {
             return await _context.Citas
-
                 .Include(c => c.Paciente)
-
                 .Include(c => c.Dentista)
                     .ThenInclude(d => d.Especialidad)
-
                 .Include(c => c.Motivo)
-
                 .Include(c => c.Servicio)
-
                 .Include(c => c.Consultorio)
-
                 .ToListAsync();
         }
 
         public async Task<Cita?> ObtenerPorIdAsync(int id)
         {
             return await _context.Citas
-
                 .Include(c => c.Paciente)
-
                 .Include(c => c.Dentista)
                     .ThenInclude(d => d.Especialidad)
-
                 .Include(c => c.Motivo)
-
                 .Include(c => c.Servicio)
-
                 .Include(c => c.Consultorio)
-
                 .FirstOrDefaultAsync(c => c.Id == id);
         }
 
         public async Task<Cita> CrearAsync(Cita cita)
         {
             _context.Citas.Add(cita);
-
             await _context.SaveChangesAsync();
-
             return cita;
         }
 
         public async Task<Cita> ActualizarAsync(Cita cita)
         {
             _context.Citas.Update(cita);
-
             await _context.SaveChangesAsync();
-
             return cita;
         }
 
@@ -76,7 +60,6 @@ namespace Final_Web_Carlos.Repositories
                 return false;
 
             _context.Citas.Remove(cita);
-
             await _context.SaveChangesAsync();
 
             return true;
@@ -94,6 +77,8 @@ namespace Final_Web_Carlos.Repositories
         {
             return await _context.Citas
                 .Where(c => c.DentistaId == dentistaId)
+                .Include(c => c.Paciente)
+                .Include(c => c.Dentista)
                 .ToListAsync();
         }
     }
