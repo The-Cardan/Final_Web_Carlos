@@ -71,6 +71,9 @@ builder.Services.AddScoped<IDentistaService, DentistaService>();
 builder.Services.AddScoped<IHorarioDentistaRepository, HorarioDentistaRepository>();
 builder.Services.AddScoped<IHorarioDentistaService, HorarioDentistaService>();
 
+builder.Services.AddScoped<IMotivoRepository, MotivoRepository>();
+builder.Services.AddScoped<IMotivoService, MotivoService>();
+
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     .AddJwtBearer(options =>
     {
