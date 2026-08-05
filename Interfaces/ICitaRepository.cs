@@ -13,5 +13,9 @@ namespace Final_Web_Carlos.Interfaces
         Task<Cita> ActualizarAsync(Cita cita);
 
         Task<bool> EliminarAsync(int id);
+
+        Task<bool> ExisteCitaAsync(int dentistaId, DateTime fecha, TimeSpan hora);
+
+        Task<List<Cita>> ObtenerPorDentistaAsync(int dentistaId);
     }
 }
