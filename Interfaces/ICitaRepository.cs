@@ -14,8 +14,10 @@ namespace Final_Web_Carlos.Interfaces
 
         Task<bool> EliminarAsync(int id);
 
+        // Verifica si el dentista ya tiene una cita en esa fecha y hora
         Task<bool> ExisteCitaAsync(int dentistaId, DateTime fecha, TimeSpan hora);
 
+        // Obtiene todas las citas de un dentista
         Task<List<Cita>> ObtenerPorDentistaAsync(int dentistaId);
     }
 }
