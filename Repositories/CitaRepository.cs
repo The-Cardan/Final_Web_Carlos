@@ -81,5 +81,20 @@ namespace Final_Web_Carlos.Repositories
 
             return true;
         }
+
+        public async Task<bool> ExisteCitaAsync(int dentistaId, DateTime fecha, TimeSpan hora)
+        {
+            return await _context.Citas.AnyAsync(c =>
+                c.DentistaId == dentistaId &&
+                c.Fecha.Date == fecha.Date &&
+                c.Hora == hora);
+        }
+
+        public async Task<List<Cita>> ObtenerPorDentistaAsync(int dentistaId)
+        {
+            return await _context.Citas
+                .Where(c => c.DentistaId == dentistaId)
+                .ToListAsync();
+        }
     }
 }
