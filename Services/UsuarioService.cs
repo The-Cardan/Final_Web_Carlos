@@ -114,7 +114,39 @@ namespace Final_Web_Carlos.Services
             };
         }
 
+        public async Task<UsuarioResponseDto?> ActualizarAsync(
+    int id,
+    UsuarioUpdateDto dto)
+        {
+            var usuario = await _usuarioRepository.ObtenerPorIdAsync(id);
 
+            if (usuario == null)
+                return null;
+
+            var usuarioConCorreo =
+                await _usuarioRepository.ObtenerPorCorreoAsync(dto.Correo);
+
+            if (usuarioConCorreo != null && usuarioConCorreo.Id != id)
+                throw new Exception(Messages.CorreoExistente);
+
+            usuario.Nombre = dto.Nombre;
+            usuario.Correo = dto.Correo;
+
+            if (!string.IsNullOrWhiteSpace(dto.Password))
+            {
+                usuario.Password =
+                    BCrypt.Net.BCrypt.HashPassword(dto.Password);
+            }
+
+            usuario = await _usuarioRepository.ActualizarAsync(usuario);
+
+            return new UsuarioResponseDto
+            {
+                Id = usuario.Id,
+                Nombre = usuario.Nombre,
+                Correo = usuario.Correo
+            };
+        }
 
         public async Task<bool> EliminarAsync(int id)
         {

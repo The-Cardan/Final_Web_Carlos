@@ -15,6 +15,8 @@ namespace Final_Web_Carlos.Interfaces
 
         Task<UsuarioResponseDto?> ActualizarAsync(int id, UsuarioUpdateDto dto);
 
+
+
         Task<bool> EliminarAsync(int id);
     }
 }
