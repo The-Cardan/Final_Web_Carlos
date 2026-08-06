@@ -7,13 +7,14 @@ namespace Final_Web_Carlos.Interfaces
     {
         Task<UsuarioResponseDto> RegistrarAsync(UsuarioRegisterDto dto);
 
-        Task<UsuarioResponseDto?> LoginAsync(UsuarioLoginDto dto);
+        Task<Usuario?> ValidarCredencialesAsync(UsuarioLoginDto dto);
 
         Task<List<UsuarioResponseDto>> ObtenerUsuariosAsync();
 
         Task<UsuarioResponseDto?> ObtenerPorIdAsync(int id);
 
+        Task<UsuarioResponseDto?> ActualizarAsync(int id, UsuarioUpdateDto dto);
+
         Task<bool> EliminarAsync(int id);
-        Task<Usuario?> ValidarCredencialesAsync(UsuarioLoginDto dto);
     }
 }
